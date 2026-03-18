@@ -3,339 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mohammed Salah - Personal Portfolio & Landing Page">
-    <title>Mohammed Salah - Personal Website</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <!-- SEO Meta Tags -->
+    <title>Mohammed Salah Eldowy | CEO</title>
+    <meta name="description" content="Portfolio of Mohammed Salah Eldowy, Founder and CEO at False Negative Integrated Solutions and OBSOLIO. Over 15 years of experience in enterprise software engineering, PHP ecosystems, and Agentic AI Solutions.">
+    <meta name="keywords" content="Mohammed Salah Eldowy, CEO, Founder, Software Engineering, Laravel, Agentic AI, Automation, PHP, WordPress, OBSOLIO, False Negative Integrated Solutions">
+    <meta name="author" content="Mohammed Salah Eldowy">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Mohammed Salah Eldowy | CEO">
+    <meta property="og:description" content="Founder and CEO with 15+ years of enterprise software engineering and Agentic AI expertise.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://abosalah.com">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@moeldowy">
+    <meta name="twitter:title" content="Mohammed Salah Eldowy | CEO">
+    <meta name="twitter:description" content="Founder and CEO with 15+ years of enterprise software engineering and Agentic AI expertise.">
+
+    <!-- JSON-LD Microdata for Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohammed Salah Eldowy",
+      "jobTitle": "Founder & CEO",
+      "worksFor": [
+        {
+          "@type": "Organization",
+          "name": "False Negative Integrated Solutions"
+        },
+        {
+          "@type": "Organization",
+          "name": "OBSOLIO"
         }
+      ],
+      "alumniOf": "Information Technology Institute (ITI)",
+      "url": "https://www.linkedin.com/in/moeldowy/",
+      "sameAs": [
+        "https://www.linkedin.com/in/moeldowy/",
+        "https://x.com/moeldowy",
+        "https://www.facebook.com/moeldowy"
+      ],
+      "email": "me@abosalah.com",
+      "telephone": "+201000765729",
+      "description": "Founder and CEO at False Negative Integrated Solutions and OBSOLIO. Over 15 years of experience in enterprise software engineering, Agentic AI solutions, and Automation.",
+      "knowsAbout": ["Agentic AI", "Enterprise Systems", "PHP", "Laravel", "WordPress"]
+    }
+    </script>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header/Navigation */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav h1 {
-            font-size: 1.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8rem 2rem 6rem;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
-        }
-
-        .hero .cta-button {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
-        }
-
-        .hero .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Sections */
-        section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #667eea;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .profile-placeholder {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: white;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        /* Skills Section */
-        .skills {
-            background: #f8f9fa;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .skill-card p {
-            color: #666;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
-    <!-- Header/Navigation -->
-    <header>
-        <nav>
-            <h1>Mohammed Salah</h1>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<body data-bs-theme="dark" data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container d-flex justify-content-center align-items-center">
+        <div class="loader-content text-center">
+            <h2 class="display-4 fw-bold text-white"><span class="gradient-text">Mo.</span>Eldowy</h2>
+            <div class="spinner-grow text-primary mt-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white fs-3 d-flex align-items-center" href="#hero">
+                <span class="gradient-text">Mo.</span>Eldowy
+            </a>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#expertise">Expertise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a class="btn btn-outline-primary rounded-pill px-4 hover-glow" href="#contact">Contact Me</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h2>Welcome to My Website</h2>
-        <p>I'm Mohammed Salah</p>
-        <a href="#contact" class="cta-button">Get In Touch</a>
+    <section id="hero" class="hero-section d-flex align-items-center position-relative overflow-hidden">
+        <!-- Abstract Animated Background -->
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+        
+        <div class="container position-relative z-1">
+            <div class="row min-vh-100 align-items-center pt-5">
+                <div class="col-lg-8 animate-on-scroll slide-up">
+                    <p class="text-primary fw-medium fs-5 mb-2 letter-spacing-1 text-uppercase">Hello, I am</p>
+                    <h1 class="display-1 fw-black text-white mb-3 name-title">Mohammed Salah Eldowy</h1>
+                    <p class="lead text-secondary mb-5 pe-lg-5 fw-light">
+                        Driving measurable business outcomes through strategic leadership, Agentic AI solutions, and robust systems.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#about" class="btn btn-primary btn-lg rounded-pill px-5 shadow-primary d-flex align-items-center gap-2">
+                            Discover My Work <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="https://wa.me/201000765729" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg rounded-pill px-4 d-flex align-items-center gap-2 hover-glow">
+                            <i class="fa-brands fa-whatsapp text-success"></i> Let's Talk
+                        </a>
+                    </div>
+                    <div class="social-links mt-5 d-flex gap-4">
+                        <a href="https://www.linkedin.com/in/moeldowy/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://x.com/moeldowy" target="_blank" class="social-icon" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.facebook.com/moeldowy" target="_blank" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator d-none d-lg-flex flex-column align-items-center">
+            <span class="text-uppercase text-muted fs-7 letter-spacing-2 mb-2">Scroll</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="about-image">
-                <div class="profile-placeholder">MS</div>
-            </div>
-            <div class="about-text">
-                <p>Hello! I'm Mohammed Salah, and this is my personal landing page. I'm passionate about creating meaningful experiences and connecting with people.</p>
-                <br>
-                <p>This website serves as a digital representation of who I am and what I do. Feel free to explore and learn more about my journey, skills, and interests.</p>
-                <br>
-                <p>Thank you for visiting, and I look forward to connecting with you!</p>
+    <section id="about" class="py-10 bg-darker position-relative">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-8 mx-auto mb-5 mb-lg-0 animate-on-scroll slide-right">
+                    <div class="about-image-wrapper glass-card p-2 rounded-4 position-relative">
+                        <div class="ceo-badge position-absolute top-0 start-0 m-3 glass-card px-3 py-2 rounded-pill d-flex align-items-center gap-2 z-2">
+                            <i class="fa-solid fa-check-circle text-primary"></i>
+                            <span class="fw-medium text-white fs-7">15+ Years Experience</span>
+                        </div>
+                        <img src="assets/imgs/Moeldowy.jpeg" alt="Mohammed Salah Eldowy" class="img-fluid rounded-4 w-100 shadow">
+                    </div>
+                </div>
+                <div class="col-lg-7 offset-lg-1 animate-on-scroll slide-left">
+                    <h2 class="section-title mb-4">Strategic <span class="gradient-text">Leadership.</span><br>Business Excellence.</h2>
+                    <p class="text-secondary fs-5 mb-4 font-inter leading-relaxed">
+                        With over 15 years in enterprise software engineering, I architect and deliver mission-critical applications that drive measurable business outcomes.
+                    </p>
+                    <p class="text-secondary font-inter mb-4">
+                        My technical methodology emphasizes clean architecture patterns, robust data modeling, microservice integration, and CI/CD pipeline optimization. I excel at translating complex business requirements into elegant, high-impact technological solutions.
+                    </p>
+                    
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="icon-box glass-card rounded-circle text-primary flex-shrink-0">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h4 class="h5 text-white mb-1">Agentic AI</h4>
+                                    <p class="text-muted small mb-0">Developing integrated AI automation solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="icon-box glass-card rounded-circle text-primary flex-shrink-0">
+                                    <i class="fa-solid fa-code-branch"></i>
+                                </div>
+                                <div>
+                                    <h4 class="h5 text-white mb-1">Scalable Systems</h4>
+                                    <p class="text-muted small mb-0">Scalable systems for high-traffic environments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <h2>My Skills & Interests</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>💻 Technology</h3>
-                <p>Passionate about exploring new technologies and staying updated with the latest trends in the digital world.</p>
+    <!-- Expertise / Skills Section -->
+    <section id="expertise" class="py-10 position-relative overflow-hidden">
+        <div class="container z-1 position-relative">
+            <div class="text-center mb-5 animate-on-scroll fade-in">
+                <span class="text-primary text-uppercase letter-spacing-2 fw-semibold fs-7 mb-2 d-block">Capabilities</span>
+                <h2 class="display-5 fw-bold text-white mb-3">My <span class="gradient-text">Expertise.</span></h2>
+                <p class="text-secondary mx-auto max-w-700">A comprehensive technical stack focused on robust backend systems, advanced web solutions, and intelligent automation.</p>
             </div>
-            <div class="skill-card">
-                <h3>🎨 Creativity</h3>
-                <p>Bringing creative solutions to challenges and thinking outside the box to achieve innovative results.</p>
-            </div>
-            <div class="skill-card">
-                <h3>🤝 Collaboration</h3>
-                <p>Working effectively with teams and building strong relationships to accomplish shared goals.</p>
-            </div>
-            <div class="skill-card">
-                <h3>📚 Learning</h3>
-                <p>Continuously growing and developing new skills through dedication and a passion for knowledge.</p>
+
+            <div class="row g-4">
+                <!-- Skill Card 1 -->
+                <div class="col-md-6 col-lg-4 animate-on-scroll slide-up" style="transition-delay: 0.1s;">
+                    <div class="expertise-card glass-card rounded-4 p-4 h-100 hover-lift">
+                        <div class="card-icon text-primary mb-4">
+                            <i class="fa-solid fa-robot fa-2x"></i>
+                        </div>
+                        <h3 class="h4 text-white mb-3">Agentic AI & Automation</h3>
+                        <p class="text-muted">Spearheading innovation with Agentic AI solutions, automating workflows, and building intelligent systems that optimize operational efficiency and business logic.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="col-md-6 col-lg-4 animate-on-scroll slide-up" style="transition-delay: 0.2s;">
+                    <div class="expertise-card glass-card rounded-4 p-4 h-100 hover-lift">
+                        <div class="card-icon text-primary mb-4">
+                            <i class="fa-brands fa-laravel fa-2x"></i>
+                        </div>
+                        <h3 class="h4 text-white mb-3">PHP & Laravel Ecosystem</h3>
+                        <p class="text-muted">Expert Laravel framework implementation and RESTful API architecture. Delivering normalized schema designs and query optimizations across relational databases.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="col-md-6 col-lg-4 animate-on-scroll slide-up" style="transition-delay: 0.3s;">
+                    <div class="expertise-card glass-card rounded-4 p-4 h-100 hover-lift">
+                        <div class="card-icon text-primary mb-4">
+                            <i class="fa-brands fa-wordpress fa-2x"></i>
+                        </div>
+                        <h3 class="h4 text-white mb-3">Enterprise WordPress</h3>
+                        <p class="text-muted">Advanced theme development, custom plugin architecture, multisite configuration, and rigorous security hardening for massive high-traffic enterprise deployments.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Get In Touch</h2>
-        <div class="contact-content">
-            <p>I'd love to hear from you! Feel free to reach out through any of the following channels:</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧 Email:</span>
-                    <a href="mailto:mohammed.salah@example.com">mohammed.salah@example.com</a>
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="py-10 bg-darker relative border-top border-dark">
+        <div class="container">
+            <div class="text-center mb-5 animate-on-scroll fade-in">
+                <span class="text-primary text-uppercase letter-spacing-2 fw-semibold fs-7 mb-2 d-block">Career Journey</span>
+                <h2 class="display-5 fw-bold text-white mb-3">Professional <span class="gradient-text">Milestones.</span></h2>
+            </div>
+
+            <div class="timeline position-relative">
+                
+                <!-- Role 1 -->
+                <div class="timeline-item animate-on-scroll slide-up">
+                    <div class="timeline-dot bg-gradient-primary"></div>
+                    <div class="glass-card rounded-4 p-4 ms-lg-5 p-lg-5 hover-border">
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-3 gap-3">
+                            <div>
+                                <h3 class="h4 text-white fw-bold mb-1">Founder & CEO</h3>
+                                <div class="text-primary fw-medium"><i class="fa-solid fa-building me-2"></i>False Negative Integrated Solutions & OBSOLIO</div>
+                            </div>
+                            <div class="glass-pill px-3 py-1 rounded-pill text-white align-self-start fs-7">
+                                Present
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0 font-inter">Leading strategic vision, delivering state-of-the-art enterprise software, and driving business outcomes through innovative technical and AI-driven solutions.</p>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <span>🐙 GitHub:</span>
-                    <a href="https://github.com/moeldowyedu" target="_blank">moeldowyedu</a>
+
+                <!-- Role 2 -->
+                <div class="timeline-item animate-on-scroll slide-up">
+                    <div class="timeline-dot bg-gradient-primary"></div>
+                    <div class="glass-card rounded-4 p-4 ms-lg-5 p-lg-5 hover-border">
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-3 gap-3">
+                            <div>
+                                <h3 class="h4 text-white fw-bold mb-1">Deputy Freelancing Zones Manager & Lecturer</h3>
+                                <div class="text-primary fw-medium"><i class="fa-solid fa-graduation-cap me-2"></i>Information Technology Institute (ITI)</div>
+                            </div>
+                            <div class="glass-pill px-3 py-1 rounded-pill text-white align-self-start fs-7">
+                                Jul 2013 - Present
+                            </div>
+                        </div>
+                        <p class="text-muted mb-3 font-inter">Managing Qena & Sohag zones (2019-2024), conducting advanced lectures on software architecture, Laravel, and APIs. Directing project supervisions and technical candidate selections.</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-dark-subtle text-light border border-secondary">Laravel</span>
+                            <span class="badge bg-dark-subtle text-light border border-secondary">REST APIs</span>
+                            <span class="badge bg-dark-subtle text-light border border-secondary">Team Leadership</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <span>📍 Location:</span>
-                    <span>Available Worldwide</span>
+
+                <!-- Role 3 -->
+                <div class="timeline-item animate-on-scroll slide-up">
+                    <div class="timeline-dot bg-gradient-primary"></div>
+                    <div class="glass-card rounded-4 p-4 ms-lg-5 p-lg-5 hover-border">
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-3 gap-3">
+                            <div>
+                                <h3 class="h4 text-white fw-bold mb-1">Project Manager</h3>
+                                <div class="text-primary fw-medium"><i class="fa-solid fa-network-wired me-2"></i>AI AlSayed Kuwait</div>
+                            </div>
+                            <div class="glass-pill px-3 py-1 rounded-pill text-white align-self-start fs-7">
+                                Jul 2024 - Feb 2025
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0 font-inter">Overseeing the planning and delivery of cutting-edge AI solutions. Coordinated cross-functional teams to ensure optimized workflows and top-tier AI-driven deployments.</p>
+                    </div>
+                </div>
+
+                <!-- Role 4 -->
+                <div class="timeline-item animate-on-scroll slide-up">
+                    <div class="timeline-dot bg-gradient-primary"></div>
+                    <div class="glass-card rounded-4 p-4 ms-lg-5 p-lg-5 hover-border">
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-3 gap-3">
+                            <div>
+                                <h3 class="h4 text-white fw-bold mb-1">Senior Full-Stack PHP & WordPress Dev</h3>
+                                <div class="text-primary fw-medium"><i class="fa-solid fa-code me-2"></i>Al Shmokh HOLDING / AM Sooq</div>
+                            </div>
+                            <div class="glass-pill px-3 py-1 rounded-pill text-white align-self-start fs-7">
+                                Mar 2023 - Jul 2024
+                            </div>
+                        </div>
+                        <p class="text-muted mb-3 font-inter">Guided architectural decisions, developed custom enterprise themes and plugins, integrating payment gateways and WooCommerce to drive business growth in Kuwait.</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-dark-subtle text-light border border-secondary">PHP</span>
+                            <span class="badge bg-dark-subtle text-light border border-secondary">WordPress</span>
+                            <span class="badge bg-dark-subtle text-light border border-secondary">System Architecture</span>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Role 5 -->
+                 <div class="timeline-item animate-on-scroll slide-up">
+                    <div class="timeline-dot bg-gradient-primary"></div>
+                    <div class="glass-card rounded-4 p-4 ms-lg-5 p-lg-5 hover-border">
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-3 gap-3">
+                            <div>
+                                <h3 class="h4 text-white fw-bold mb-1">Chief Executive Officer</h3>
+                                <div class="text-primary fw-medium"><i class="fa-solid fa-chart-line me-2"></i>Akwadna</div>
+                            </div>
+                            <div class="glass-pill px-3 py-1 rounded-pill text-white align-self-start fs-7">
+                                Dec 2017 - Sep 2021
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0 font-inter">Championed organizational strategy, team building, operations management, and technical SEO initiatives to expand corporate market presence.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact Section -->
+    <section id="contact" class="py-10 position-relative overflow-hidden">
+        <!-- Abstract Animated Background 2 -->
+        <div class="bg-blob blob-4"></div>
+        <div class="container position-relative z-1">
+            <div class="glass-card rounded-5 p-5 p-lg-10 text-center animate-on-scroll border-glow scale-up">
+                <span class="text-primary text-uppercase letter-spacing-2 fw-semibold fs-7 mb-3 d-block">Let's Connect</span>
+                <h2 class="display-4 fw-bold text-white mb-4">Ready to Transform Your <br><span class="gradient-text">Business Operations?</span></h2>
+                <p class="text-secondary fs-5 mb-5 max-w-700 mx-auto font-inter">
+                    Whether you need a visionary CEO, a highly scalable system, or an integrated Agentic AI solution, I'm ready to discuss your next mission-critical project.
+                </p>
+                
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-4 mb-5">
+                    <a href="mailto:me@abosalah.com" class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-primary d-flex align-items-center justify-content-center gap-3">
+                        <i class="fa-solid fa-envelope fs-5"></i>
+                        <span>Send an Email</span>
+                    </a>
+                    <a href="https://wa.me/201000765729" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-lg rounded-pill px-5 py-3 shadow-success d-flex align-items-center justify-content-center gap-3">
+                        <i class="fa-brands fa-whatsapp fs-5"></i>
+                        <span>Message on WhatsApp</span>
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="https://www.linkedin.com/in/moeldowy/" target="_blank" class="social-icon social-icon-lg glass-card" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://x.com/moeldowy" target="_blank" class="social-icon social-icon-lg glass-card" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.facebook.com/moeldowy" target="_blank" class="social-icon social-icon-lg glass-card" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Mohammed Salah. All rights reserved.</p>
+    <footer class="py-4 border-top border-dark text-center bg-darker">
+        <div class="container">
+            <p class="text-muted mb-0 font-inter fs-7">
+                &copy; <span id="currentYear"></span> Mohammed Salah Eldowy. All rights reserved.
+            </p>
+        </div>
     </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
