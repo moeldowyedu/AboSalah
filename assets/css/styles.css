@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Eldowy — Brand System v2
+   Mo Eldowy — Brand System v2
    Palette: ink base, electric blue primary, signal mint accent
    Type: Space Grotesk (display) / Inter (body) / JetBrains Mono (labels)
    ========================================================================== */
@@ -313,7 +313,6 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: var(--text-hi);
-    backdrop-filter: blur(10px);
 }
 .btn-ghost:hover {
     color: var(--text-hi);
@@ -329,10 +328,11 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 .shadow-primary { box-shadow: 0 14px 32px -18px var(--brand-glow); }
 
 /* ---------- Glass surfaces ---------- */
+/* No backdrop-filter here on purpose: these cards sit on a near-solid
+   background, so a real backdrop blur costs a compositing layer each and
+   stalls the GPU when a dozen of them reveal at once. */
 .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     transition: var(--t);
@@ -342,7 +342,6 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 .glass-pill {
     background: var(--glass-bg-hi);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(6px);
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.08em;
@@ -393,7 +392,7 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 /* ---------- Hero ---------- */
 .hero-section { padding-top: 7rem; }
 
-.name-title { font-size: clamp(2.4rem, 6.4vw, 5rem); font-weight: 700; }
+.name-title { font-size: clamp(2.1rem, 4.4vw, 3.75rem); font-weight: 700; }
 
 .role-rotator {
     font-family: var(--font-mono);
@@ -471,37 +470,204 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
     100% { opacity: 0; transform: translateX(-50%) translateY(14px); }
 }
 
-/* ---------- Portrait ---------- */
-.portrait-wrap { position: relative; }
-.portrait-wrap img {
-    border-radius: calc(var(--radius) - 4px);
-    filter: saturate(1.02) contrast(1.03);
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center 15%;
-    height: auto;
+/* ==========================================================================
+   Hero portrait
+   Entrance wipe + slow aperture ring + restrained pointer parallax
+   ========================================================================== */
+.hero-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+    perspective: 1200px;
 }
-.portrait-frame {
+@media (min-width: 992px) {
+    .hero-portrait { margin-right: 0; margin-left: auto; max-width: 420px; }
+}
+
+/* Soft light behind the frame */
+.hp-halo {
     position: absolute;
-    inset: -12px;
-    border: 1px solid var(--hairline);
-    border-radius: calc(var(--radius) + 8px);
-    pointer-events: none;
+    inset: -18% -14%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 45%, var(--brand-glow) 0%, transparent 62%);
+    filter: blur(52px);
+    opacity: 0;
+    transition: opacity 1.6s var(--ease);
+    z-index: 0;
 }
-.portrait-frame::before, .portrait-frame::after {
+.hero-portrait.is-revealed .hp-halo { opacity: 0.7; animation: haloBreathe 11s ease-in-out infinite 1.6s; }
+
+/* Opacity only — animating scale would repaint a 52px blur every frame */
+@keyframes haloBreathe {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 0.85; }
+}
+
+/* Gradient outline offset from the frame. Static by design: an endlessly
+   spinning ring is both expensive to paint and the cheapest-looking part
+   of any portfolio hero. It brightens on hover instead. */
+.hp-ring {
+    position: absolute;
+    inset: -14px;
+    border-radius: 30px;
+    background: linear-gradient(150deg, var(--brand) 0%, var(--signal) 42%, transparent 70%);
+    padding: 1px;
+    opacity: 0;
+    transition: opacity 1.4s var(--ease) 0.5s;
+    z-index: 1;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+.hero-portrait.is-revealed .hp-ring { opacity: 0.55; }
+.hero-portrait:hover .hp-ring { opacity: 0.9; transition-delay: 0s; }
+
+/* Static hairline the ring travels along */
+.hp-ring::after {
     content: '';
     position: absolute;
-    width: 22px; height: 22px;
-    border: 2px solid var(--signal);
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid var(--hairline);
 }
-.portrait-frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
-.portrait-frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
 
-.badge-float {
-    background: rgba(5, 7, 11, 0.78);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+/* The framed image itself */
+.hp-frame {
+    position: relative;
+    display: block;
+    z-index: 2;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--hairline-strong);
+    background: var(--ink-700);
+    box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    /* Entrance: wipe up from the bottom edge */
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1.25s var(--ease), box-shadow var(--t);
 }
+.hero-portrait.is-revealed .hp-frame { clip-path: inset(0 0 0 0); }
+
+/* Pulls the photo's warm backdrop toward the brand palette without
+   touching skin tones enough to look filtered */
+.hp-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(200deg, rgba(91, 140, 255, 0.22) 0%, transparent 55%),
+        linear-gradient(to top, rgba(5, 7, 11, 0.55) 0%, transparent 42%);
+}
+
+.hp-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 12%;
+    filter: saturate(0.92) contrast(1.05);
+    transform: scale(1.08);
+    opacity: 0;
+    transition: transform 1.6s var(--ease), opacity 1.1s var(--ease);
+}
+.hero-portrait.is-revealed .hp-img { transform: scale(1); opacity: 1; }
+
+/* One-pass light sweep across the glass */
+.hp-sheen {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.14) 50%, transparent 62%);
+    transform: translateX(-120%);
+    pointer-events: none;
+}
+.hero-portrait.is-revealed .hp-sheen { animation: sheenSweep 1.5s var(--ease) 1.1s 1; }
+.hero-portrait:hover .hp-sheen { animation: sheenSweep 1.4s var(--ease) 1; }
+
+@keyframes sheenSweep {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(120%); }
+}
+
+/* Nameplate */
+.hp-plate {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -26px;
+    z-index: 3;
+    padding: 0.85rem 1.15rem;
+    border-radius: 14px;
+    background: rgba(5, 7, 11, 0.82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 44px -26px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.9s var(--ease) 1.05s, transform 0.9s var(--ease) 1.05s;
+}
+.hero-portrait.is-revealed .hp-plate { opacity: 1; transform: translateY(0); }
+
+.hp-plate-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--text-hi);
+    letter-spacing: -0.02em;
+}
+.hp-plate-role {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-low);
+    margin-top: 4px;
+}
+
+/* Pointer parallax — JS supplies the angles, capped small on purpose */
+.hero-portrait[data-tilt] .hp-frame {
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: clip-path 1.25s var(--ease), transform 0.5s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hp-frame { clip-path: inset(0 0 0 0) !important; }
+    .hp-img { opacity: 1 !important; transform: none !important; }
+    .hp-plate { opacity: 1 !important; transform: none !important; }
+    .hp-halo { opacity: 0.6 !important; animation: none !important; }
+    .hp-ring { opacity: 0.7 !important; animation: none !important; }
+    .hp-sheen { display: none; }
+}
+
+/* ---------- Pull quote ---------- */
+.pull-quote {
+    margin: 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--brand);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--text-hi);
+}
+
+/* ---------- Principle rows ---------- */
+.principle {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--hairline);
+}
+.principle:last-child { border-bottom: 0; padding-bottom: 0; }
 
 /* ---------- Venture cards ---------- */
 .venture-logo {
@@ -512,7 +678,17 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
     flex-shrink: 0;
 }
 .venture-logo.fn { background: linear-gradient(140deg, var(--brand), #8aa9ff); }
-.venture-logo.ob { background: linear-gradient(140deg, var(--signal), #9df5de); }
+.venture-logo.sc { background: linear-gradient(140deg, var(--signal), #9df5de); }
+
+.venture-domain {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-low);
+    transition: color var(--t);
+}
+.venture-domain i { font-size: 0.6rem; opacity: 0.7; }
+.venture-domain:hover { color: var(--signal); }
 
 /* ---------- Capability cards ---------- */
 .expertise-card { position: relative; }
@@ -659,6 +835,10 @@ footer { border-top: 1px solid var(--hairline); background: var(--ink-800); }
     /* Sideways pre-reveal offsets push past the viewport on narrow screens */
     .slide-left, .slide-right { transform: translateY(28px); }
     .hero-section { padding-top: 6rem; text-align: left; }
+    .hero-portrait { max-width: 300px; margin-bottom: 3rem; }
+    .hp-plate { left: 10px; right: 10px; bottom: -22px; padding: 0.7rem 0.95rem; }
+    .hp-plate-name { font-size: 0.88rem; }
+    .hp-plate-role { font-size: 0.6rem; }
     .py-10 { padding-top: 4rem; padding-bottom: 4rem; }
     .glass-card { padding: 1.35rem !important; }
     .stat-cell { padding: 1.1rem 0.25rem; }
@@ -715,6 +895,8 @@ footer { border-top: 1px solid var(--hairline); background: var(--ink-800); }
 [data-bs-theme="light"] .tag { background: rgba(47, 95, 224, 0.05); color: var(--text-mid); }
 [data-bs-theme="light"] .social-icon:hover { color: #ffffff; }
 [data-bs-theme="light"] .btn-primary:hover { color: #ffffff; }
-[data-bs-theme="light"] .badge-float { background: rgba(255, 255, 255, 0.9); }
+[data-bs-theme="light"] .hp-plate { background: rgba(255, 255, 255, 0.9); }
+[data-bs-theme="light"] .hp-frame { box-shadow: 0 34px 70px -40px rgba(15, 30, 60, 0.55); }
+[data-bs-theme="light"] .hp-sheen { background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.5) 50%, transparent 62%); }
 [data-bs-theme="light"] .bg-blob { opacity: 0.35; }
 [data-bs-theme="light"] .custom-toggler i { color: var(--text-hi) !important; }

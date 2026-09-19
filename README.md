@@ -1,6 +1,6 @@
-# ELDOWY — abosalah.com
+# Mo Eldowy — abosalah.com
 
-Personal site of **Mohammed Salah Eldowy** — Founder & CEO, False Negative Integrated Solutions & OBSOLIO.
+Personal site of **Mohammed Salah Eldowy** — Founder & CEO, False Negative Integrated Solutions & Scorit.
 
 Static single-page site. No build step.
 

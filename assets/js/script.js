@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Eldowy — site behaviour
+   Mo Eldowy — site behaviour
    ========================================================================== */
 
 (() => {
@@ -49,7 +49,7 @@
         /* --- 4. Role rotator (typewriter) -------------------------------- */
         const roleText = document.getElementById('roleText');
         const roles = [
-            'Founder & CEO — False Negative & OBSOLIO',
+            'Founder & CEO — False Negative & Scorit',
             'Agentic AI systems architect',
             'Laravel & enterprise engineer',
             'Lecturer at ITI since 2013'
@@ -84,7 +84,53 @@
             }
         }
 
-        /* --- 5. Scroll reveal -------------------------------------------- */
+        /* --- 5. Hero portrait: reveal + pointer parallax ------------------ */
+        const portrait = document.getElementById('heroPortrait');
+
+        if (portrait) {
+            const img = portrait.querySelector('.hp-img');
+
+            // Start the entrance once the photo itself is decoded, so the wipe
+            // never uncovers an empty frame.
+            const reveal = () => portrait.classList.add('is-revealed');
+            if (img && !img.complete) {
+                img.addEventListener('load', () => setTimeout(reveal, 450), { once: true });
+                img.addEventListener('error', reveal, { once: true });
+            } else {
+                setTimeout(reveal, 450);
+            }
+
+            // Parallax only where there's a real pointer, and never past 5deg.
+            const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            if (finePointer && !reduceMotion) {
+                const MAX = 5;
+                let frame = null;
+
+                const onMove = event => {
+                    if (frame) return;
+                    frame = requestAnimationFrame(() => {
+                        frame = null;
+                        const box = portrait.getBoundingClientRect();
+                        const px = (event.clientX - box.left) / box.width - 0.5;
+                        const py = (event.clientY - box.top) / box.height - 0.5;
+                        portrait.style.setProperty('--ry', (px * MAX * 2).toFixed(2) + 'deg');
+                        portrait.style.setProperty('--rx', (-py * MAX * 2).toFixed(2) + 'deg');
+                    });
+                };
+
+                const onLeave = () => {
+                    portrait.style.setProperty('--rx', '0deg');
+                    portrait.style.setProperty('--ry', '0deg');
+                };
+
+                portrait.setAttribute('data-tilt', '');
+                portrait.addEventListener('mousemove', onMove);
+                portrait.addEventListener('mouseleave', onLeave);
+            }
+        }
+
+        /* --- 6. Scroll reveal -------------------------------------------- */
         const animated = document.querySelectorAll('.animate-on-scroll');
 
         if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -100,13 +146,28 @@
             }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
             animated.forEach(el => observer.observe(el));
+
+            // A deep link (#contact), a restored scroll position, or any jump
+            // lands past sections that then never intersect — they would stay
+            // invisible forever. Reveal anything at or above the fold outright.
+            const revealPassed = () => {
+                animated.forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add('in-view');
+                        observer.unobserve(el);
+                    }
+                });
+            };
+            window.addEventListener('load', revealPassed);
+            window.addEventListener('hashchange', () => setTimeout(revealPassed, 60));
+            setTimeout(revealPassed, 120);
         }
 
-        /* --- 6. Footer year ---------------------------------------------- */
+        /* --- 7. Footer year ---------------------------------------------- */
         const yearElement = document.getElementById('currentYear');
         if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-        /* --- 7. Theme toggle --------------------------------------------- */
+        /* --- 8. Theme toggle --------------------------------------------- */
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
 
