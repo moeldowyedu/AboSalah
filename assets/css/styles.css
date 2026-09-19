@@ -50,10 +50,11 @@ body {
     background-color: var(--ink-900);
     color: var(--text-hi);
     font-family: var(--font-body);
-    /* clip, not hidden: `hidden` would make body its own scroll container,
-       which silently breaks window.scrollTo — and with it every nav link,
-       since Bootstrap's ScrollSpy scrolls the window on click. */
-    overflow-x: clip;
+    /* No overflow-x here: non-visible overflow on body or html propagates to
+       the viewport and turns it into a scroll container, which is worth
+       avoiding while Bootstrap's ScrollSpy drives the nav by scrolling the
+       window. Horizontal overflow is contained per-section instead, via
+       .overflow-hidden on the sections whose decoration bleeds out. */
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.011em;
 }
@@ -696,32 +697,6 @@ footer .brand-lockup:hover .brand-mark {
 .venture-domain i { font-size: 0.6rem; opacity: 0.7; }
 .venture-domain:hover { color: var(--signal); }
 
-/* ---------- Capability cards ---------- */
-.expertise-card { position: relative; }
-.card-icon {
-    width: 52px; height: 52px;
-    border-radius: 14px;
-    display: grid; place-items: center;
-    background: var(--glass-bg-hi);
-    border: 1px solid var(--glass-border);
-    color: var(--brand);
-    font-size: 1.15rem;
-    transition: var(--t);
-}
-.expertise-card:hover .card-icon {
-    color: var(--signal);
-    border-color: rgba(85, 230, 193, 0.35);
-    transform: translateY(-2px);
-}
-.card-index {
-    position: absolute;
-    top: 1.35rem; right: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-low);
-    letter-spacing: 0.12em;
-}
-
 .tag {
     display: inline-block;
     font-family: var(--font-mono);
@@ -773,11 +748,6 @@ footer .brand-lockup:hover .brand-mark {
 }
 
 .role-org { color: var(--brand); font-weight: 500; font-size: 0.95rem; }
-
-/* Sidebar expertise list */
-.expertise-row { padding: 1.05rem 0; border-bottom: 1px solid var(--hairline); }
-.expertise-row:last-child { border-bottom: 0; padding-bottom: 0; }
-.expertise-row:first-child { padding-top: 0; }
 
 /* ---------- Social ---------- */
 .social-icon {
