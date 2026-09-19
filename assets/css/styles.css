@@ -200,22 +200,25 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 /* ---------- Brand mark ---------- */
 .brand-lockup { display: inline-flex; align-items: center; gap: 0.7rem; }
 
+/* The mark is Mo's portrait, cropped square and ringed in brand colour */
 .brand-mark {
     width: 38px;
     height: 38px;
     border-radius: 11px;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(140deg, var(--brand), var(--signal));
-    color: #05070b;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: -0.06em;
-    box-shadow: 0 8px 24px -10px var(--brand-glow);
+    object-fit: cover;
+    object-position: center 22%;
+    display: block;
     flex-shrink: 0;
+    background: var(--ink-700);
+    box-shadow: 0 0 0 1px var(--hairline-strong), 0 8px 24px -12px var(--brand-glow);
+    transition: box-shadow var(--t);
 }
-.brand-mark-lg { width: 54px; height: 54px; border-radius: 15px; font-size: 1.3rem; }
+.navbar-brand:hover .brand-mark,
+footer .brand-lockup:hover .brand-mark {
+    box-shadow: 0 0 0 1px var(--brand), 0 10px 26px -12px var(--brand-glow);
+}
+
+.brand-mark-lg { width: 62px; height: 62px; border-radius: 18px; }
 
 .brand-word {
     font-family: var(--font-display);
@@ -891,7 +894,6 @@ footer { border-top: 1px solid var(--hairline); background: var(--ink-800); }
 [data-bs-theme="light"] .glass-nav { background: rgba(255, 255, 255, 0.72); }
 [data-bs-theme="light"] .glass-nav.scrolled { background: rgba(255, 255, 255, 0.95); box-shadow: 0 6px 30px -18px rgba(15, 30, 60, 0.3); }
 [data-bs-theme="light"] .navbar-collapse { background: #ffffff; }
-[data-bs-theme="light"] .brand-mark { color: #ffffff; }
 [data-bs-theme="light"] .venture-logo { color: #ffffff; }
 [data-bs-theme="light"] .status-chip { background: rgba(15, 158, 134, 0.08); border-color: rgba(15, 158, 134, 0.3); }
 [data-bs-theme="light"] .timeline-dot { background: #ffffff; }
