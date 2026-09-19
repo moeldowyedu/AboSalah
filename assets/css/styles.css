@@ -671,16 +671,6 @@ footer .brand-lockup:hover .brand-mark {
     color: var(--text-hi);
 }
 
-/* ---------- Principle rows ---------- */
-.principle {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.15rem 0;
-    border-bottom: 1px solid var(--hairline);
-}
-.principle:last-child { border-bottom: 0; padding-bottom: 0; }
-
 /* ---------- Venture cards ---------- */
 .venture-logo {
     width: 46px; height: 46px; border-radius: 13px;
@@ -712,14 +702,6 @@ footer .brand-lockup:hover .brand-mark {
     background: rgba(255, 255, 255, 0.045);
     border: 1px solid var(--hairline);
     color: var(--text-mid);
-}
-
-/* ---------- Icon box (about) ---------- */
-.icon-box {
-    width: 46px; height: 46px;
-    display: grid; place-items: center;
-    font-size: 1.05rem;
-    border-radius: 13px;
 }
 
 /* ---------- Timeline ---------- */
