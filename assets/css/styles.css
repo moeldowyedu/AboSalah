@@ -44,13 +44,16 @@
 }
 
 /* ---------- Base ---------- */
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 
 body {
     background-color: var(--ink-900);
     color: var(--text-hi);
     font-family: var(--font-body);
-    overflow-x: hidden;
+    /* clip, not hidden: `hidden` would make body its own scroll container,
+       which silently breaks window.scrollTo — and with it every nav link,
+       since Bootstrap's ScrollSpy scrolls the window on click. */
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.011em;
 }
