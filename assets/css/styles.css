@@ -77,6 +77,11 @@ body::before {
 
 section, nav, footer { position: relative; z-index: 1; }
 
+/* Nav links are plain anchors — CSS does the smooth scroll, and the browser
+   updates the URL hash so a section stays linkable. This keeps the fixed
+   navbar from covering whatever the anchor lands on. */
+section[id] { scroll-margin-top: 86px; }
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     letter-spacing: -0.03em;

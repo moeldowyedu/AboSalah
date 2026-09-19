@@ -49,7 +49,7 @@
         /* --- 4. Role rotator (typewriter) -------------------------------- */
         const roleText = document.getElementById('roleText');
         const roles = [
-            'Founder & CEO — False Negative & Scorit',
+            'Founder & CEO — False Negative Integrated Solutions',
             'Agentic AI systems architect',
             'Laravel & enterprise engineer',
             'Lecturer at ITI since 2013'
